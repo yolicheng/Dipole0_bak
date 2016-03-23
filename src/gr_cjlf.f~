@@ -1,0 +1,29 @@
+c***********************************************************************
+c  for the case of lorentz force, compute the energy integral
+c  c = 3x²-z² - sgn* 2(y²+z²)/r³ - (dotx² + doty² + dotz²), sgn:1 if q/m>0; -1 if q/m<0
+
+c	input
+c  y(6) 	the initial state
+c  sgn   	1 if q/m>0; -1 if q/m<0
+c***********************************************************************
+        subroutine gr_cjlf(y, cj)
+        
+        use lfmod, only : sgn
+        
+        implicit real*8(a-h,o-z)
+        dimension y(6)
+        y1=y(1)**2
+        y2=y(2)**2
+        y3=y(3)**2
+        
+        r = dsqrt(y1 + y2 + y3) 
+        r3 = r**3
+        dv2 = y(4)**2 + y(5)**2 + y(6)**2 
+        
+        
+        cj = 3*y1 - y3 - sgn * 2 * (y2+y3)/r3 - dv2 
+
+	
+        return
+        end
+
